@@ -1,0 +1,123 @@
+<!--Navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark primary-color">
+
+  <!-- Navbar brand -->
+  <a class="navbar-brand" href="#">What's cooking</a>
+
+  <!-- Collapse button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+    aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Collapsible content -->
+  <div class="collapse navbar-collapse" id="basicExampleNav">
+
+    <!-- Links -->
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Home
+          <span class="sr-only">(current)</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/saved">Recipe Box</a>
+      </li>
+      <li class="nav-item">
+      </li>
+      <li class="nav-item">
+      </li>
+    </ul>
+    <!-- Links -->
+    <button type="button" id="clear-all" class="btn btn-secondary">Clear</button>
+    {{!-- <form class="form-inline">
+      <div class="md-form my-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+      </div>
+    </form> --}}
+  </div>
+  <!-- Collapsible content -->
+
+</nav>
+<!--/.Navbar-->
+
+<!-- Jumbotron -->
+<div class="jumbotron card card-image" style="background-image: url(https://www.supermarketnews.com/sites/supermarketnews.com/files/styles/article_featured_standard/public/viewpoint1promo.png?itok=jFrK8FsN); background-repeat: no-repeat;
+    background-size: cover;">
+  <div class="text-white text-center py-5 px-4">
+    <div>
+      <h2 class="card-title h1-responsive pt-3 mb-5 font-bold"><strong>What is for dinner?</strong>
+      </h2>
+      <p class="mx-5 mb-5"><h3>Your Recipe Box</h3></p>
+    </div>
+  </div>
+</div>
+<!-- Jumbotron -->
+<div class="row" id="saved-articles">
+  {{#each articles}}
+  {{#if saved}}
+    <!-- Card -->
+    <div data-_id={{this._id}} class="card mb-4">
+
+    <!--Card image-->
+    <div class="view overlay">
+
+      <a href={{this.link}}><img class="card-img-top" src={{this.image}} alt="Card image cap">
+        {{!-- <div class="mask rgba-white-slight"></div> --}}
+      </a>
+    </div>
+
+    <!--Card content-->
+    <div class="card-body">
+
+      <!--Title-->
+      <a class="card-title" href={{this.link}}>
+        <h4>{{this.title}}</h4>
+      </a>
+
+      <!--Text-->
+      <button type="button" id="note" class="btn btn-outline-primary waves-effect">Review Recipe</button>
+      <button type="button" id="delete-article" class="btn btn-outline-danger waves-effect">Remove Recipe</button>
+    </div>
+
+  </div>
+  <!-- Card -->
+  {{/if}}
+  {{/each}} {{#unless articles.length}}
+ <div class="alert  alert-primary text-center" role="alert" id="empty">
+    <h3>Looks like You don't have any Recipes in the Box</h3>
+  </div>
+  <div class="alert alert-primary text-center" role="alert">
+    <h4>Would you like to <a href="/" class="alert-link">Browse Available Recipes?</a></h4>
+  </div>
+
+
+
+  {{/unless}}
+</div>
+
+<!-- Full Height Modal Right -->
+<div class="modal fade right noteModal" id="fullHeightModalRight" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="false">
+
+  <!-- Add class .modal-full-height and then add class .modal-right (or other classes from list above) to set a position to the modal -->
+  <div class="modal-dialog modal-full-height modal-right" role="document">
+
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-100" id="myModalLabel">{{this.title}}</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-success">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Full Height Modal Right -->

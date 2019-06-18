@@ -1,0 +1,100 @@
+<!--Navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark primary-color">
+
+  <!-- Navbar brand -->
+  <a class="navbar-brand" href="#">What's cooking</a>
+
+  <!-- Collapse button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+    aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Collapsible content -->
+  <div class="collapse navbar-collapse" id="basicExampleNav">
+
+    <!-- Links -->
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Home
+          <span class="sr-only">(current)</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/saved">Recipe Box</a>
+      </li>
+      <li class="nav-item">
+      </li>
+      <li class="nav-item">
+      </li>
+    </ul>
+    <!-- Links -->
+    <button type="button" class="btn btn-default scrape">Scrape</button>
+    <button type="button" id="clear-all" class="btn btn-secondary">Clear</button>
+    {{!-- <form class="form-inline">
+      <div class="md-form my-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+      </div>
+    </form> --}}
+  </div>
+  <!-- Collapsible content -->
+
+</nav>
+<!--/.Navbar-->
+
+<!-- Jumbotron -->
+<div class="jumbotron card card-image" style="background-image: url(https://www.supermarketnews.com/sites/supermarketnews.com/files/styles/article_featured_standard/public/viewpoint1promo.png?itok=jFrK8FsN); background-repeat: no-repeat;
+    background-size: cover;">
+  <div class="text-white text-center py-5 px-4">
+    <div>
+      <h2 class="card-title h1-responsive pt-3 mb-5 font-bold"><strong>...need ideas what to cook tonight?</strong>
+      </h2>
+      <p class="mx-5 mb-5"><h3>Food & Wine Mongo Scraper</h3></p>
+      {{!-- <button type="button" class="btn btn-default">Scrape</button> --}}
+      {{!-- <button type="button" class="btn btn-secondary">Clear</button> --}}
+      {{!-- <a class="btn btn-outline-white btn-md"><i class="fas fa-clone left"></i> View project</a> --}}
+    </div>
+  </div>
+</div>
+<!-- Jumbotron -->
+<div class="row" id="scraped-articles">
+  {{#each articles}}
+  <!-- Card -->
+  <div {{this._id}} class="card mb-4">
+
+    <!--Card image-->
+    <div class="view overlay">
+
+      <a href={{this.link}}><img class="card-img-top" src={{this.image}} alt="Card image cap">
+        {{!-- <div class="mask rgba-white-slight"></div> --}}
+      </a>
+    </div>
+
+    <!--Card content-->
+    <div class="card-body">
+
+      <!--Title-->
+      <a class="card-title" href={{this.link}}>
+        <h4>{{this.title}}</h4>
+      </a>
+
+      <!--Text-->
+      <button type="button" id="save-article" class="btn btn-light-blue btn-md">Save</button>
+
+    </div>
+
+  </div>
+  <!-- Card -->
+
+  {{/each}} {{#unless articles.length}}
+  <div class="alert  alert-primary text-center" id="empty">
+    <h3>We don't have any New Recipes</h3>
+  </div>
+  <div class="alert alert-primary text-center" role="alert">
+    <h4>Would you like to <a class="alert-link scrape">Try Scraping New Recipes</a> or <a href="/saved" class="alert-link">Go to Recipe Box?</a></h4>
+  </div>
+
+
+  {{/unless}}
+
+</div>
