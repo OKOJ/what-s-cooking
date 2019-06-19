@@ -25,8 +25,8 @@ module.exports = app => {
                     .then(function (dbArticle) {
                         // View the added result in the console
                         console.log("server response", dbArticle);
-                        res.render("index", {articles: dbArticles});
-                     
+                       // res.render("index", {articles: dbArticles});
+                        //location.reload()
                     })
                     .catch(function (err) {
                         // If an error occurred, log it
@@ -88,7 +88,7 @@ module.exports = app => {
 
     //Delete  specified article and notes associated with this article 
     app.delete("/articles/:id", function (req, res) {
-        db.Article.remove({
+        db.Article.findOneAndDelete({
                 _id: req.params.id
             })
             .then(function (req, res) {

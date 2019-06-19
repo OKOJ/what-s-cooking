@@ -48,7 +48,9 @@
     <div>
       <h2 class="card-title h1-responsive pt-3 mb-5 font-bold"><strong>What is for dinner?</strong>
       </h2>
-      <p class="mx-5 mb-5"><h3>Your Recipe Box</h3></p>
+      <p class="mx-5 mb-5">
+        <h3>Your Recipe Box</h3>
+      </p>
     </div>
   </div>
 </div>
@@ -56,8 +58,8 @@
 <div class="row" id="saved-articles">
   {{#each articles}}
   {{#if saved}}
-    <!-- Card -->
-    <div data-_id={{this._id}} class="card mb-4">
+  <!-- Card -->
+  <div data-_id={{this._id}} class="card mb-4">
 
     <!--Card image-->
     <div class="view overlay">
@@ -76,48 +78,50 @@
       </a>
 
       <!--Text-->
-      <button type="button" id="note" class="btn btn-outline-primary waves-effect">Review Recipe</button>
-      <button type="button" id="delete-article" class="btn btn-outline-danger waves-effect">Remove Recipe</button>
+      <button id="modalActivate" data-id={{this._id}} type="button" class="btn btn-outline-primary waves-effect"
+        data-toggle="modal" data-target="#exampleModalPreview">
+        Recipe Notes
+      </button>
+      {{!-- <button type="button" id="note" data-id={{this._id}} class="btn btn-outline-primary waves-effect">Review Recipe</button> --}}
+      <button type="button" id="delete-article" data-id={{this._id}} class="btn btn-outline-danger waves-effect delete">Remove
+        Recipe</button>
     </div>
+    <!-- Modal -->
+    <div class="modal fade right" id="exampleModalPreview" tabindex="-1" role="dialog"
+      aria-labelledby="exampleModalPreviewLabel" aria-hidden="true">
+      <div class="modal-dialog modal-full-height modal-right" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalPreviewLabel"><strong>Notes for:</strong> {{this.title}}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="md-form">
+              <i class="fas fa-pencil-alt prefix"></i>
+              <textarea id="form10" class="md-textarea form-control" rows="3"></textarea>
+              <label for="form10">Note</label>
+            </div>
+          </div>
+          <div class="modal-footer">
+            {{!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> --}}
+            <button type="button" class="btn btn-success save">Save Note</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal -->
 
   </div>
   <!-- Card -->
   {{/if}}
   {{/each}} {{#unless articles.length}}
- <div class="alert  alert-primary text-center" role="alert" id="empty">
+  <div class="alert  alert-primary text-center" role="alert" id="empty">
     <h3>Looks like You don't have any Recipes in the Box</h3>
   </div>
   <div class="alert alert-primary text-center" role="alert">
     <h4>Would you like to <a href="/" class="alert-link">Browse Available Recipes?</a></h4>
   </div>
-
-
-
   {{/unless}}
 </div>
-
-<!-- Full Height Modal Right -->
-<div class="modal fade right noteModal" id="fullHeightModalRight" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-  aria-hidden="false">
-
-  <!-- Add class .modal-full-height and then add class .modal-right (or other classes from list above) to set a position to the modal -->
-  <div class="modal-dialog modal-full-height modal-right" role="document">
-
-
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title w-100" id="myModalLabel">{{this.title}}</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-success">Save</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Full Height Modal Right -->
