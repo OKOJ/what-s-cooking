@@ -6,10 +6,25 @@ $(document).ready(function () {
     $("#clear-all").on("click", handleArticleClear);
     $("#save-article").on("click", handleArticleSave);
 
+    function  homePage(){
+
+        $.get("/articles?saved=false").then(function(data){
+            alert("welcome")
+            $("#scraped-article").empty();
+            if(data && data.length){
+                //renderArticles(data);
+                console.log("we have something")
+            }else{
+                //renderEmpty()
+                console.log("it's empty")
+            }
+        })
+    }
+
     function handleArticleScrape() {
         $.get("/scrape").then(function (data) {
             //alert("scrape is success")
-            //initPage();
+            homePage();
             alert(data);
         })
     };
@@ -17,7 +32,7 @@ $(document).ready(function () {
     function handleArticleClear() {
         $.get("/clear").then(function () {
             $("#scraped-articles").empty();
-            //initPage(); 
+            homePage(); 
         })
     };
 
@@ -35,7 +50,7 @@ $(document).ready(function () {
         }).then(function (data) {
             if (data.saved) {
                 console.log(data);
-                // initPage();
+               homePage();
             }
         })
     };

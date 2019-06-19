@@ -34,7 +34,10 @@ require("./routes/htmlRoutes")(app);
 
 // Hook mongoose configuration to the db variable
 //mongoose.connect('mongodb://username:password@host:port/database?options...',{useNewUrlParser: true});
-mongoose.connect("mongodb://localhost/article", {useNewUrlParser:true});
+// If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+
+mongoose.connect(MONGODB_URI);
 
 
 
@@ -46,12 +49,3 @@ app.listen(PORT, function () {
 
  module.exports = app;
 
-// "_id": "heroku_fqll14g3.heroku_fqll14g3",
-// "user": "heroku_fqll14g3",
-// "db": "heroku_fqll14g3",
-// "roles": [
-//     {
-//         "role": "dbOwner",
-//         "db": "heroku_fqll14g3"
-//     }
-// ],
