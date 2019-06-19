@@ -24,7 +24,9 @@ module.exports = app => {
                 db.Article.create(result)
                     .then(function (dbArticle) {
                         // View the added result in the console
-                        //console.log(dbArticle);
+                        console.log("server response", dbArticle);
+                        res.render("index", {articles: dbArticles});
+                     
                     })
                     .catch(function (err) {
                         // If an error occurred, log it

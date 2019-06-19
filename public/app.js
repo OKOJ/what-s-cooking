@@ -25,7 +25,8 @@ $(document).ready(function () {
         $.get("/scrape").then(function (data) {
             //alert("scrape is success")
             homePage();
-            alert(data);
+            location.reload(true);
+           console.log(data);
         })
     };
 
@@ -37,22 +38,42 @@ $(document).ready(function () {
     };
 
     function handleArticleSave() {
-        var articleToSave =
-            $(this).parents(".card").data();
-        $(this).parents(".card").remove();
-
-        articleToSave.saved = true;
-
-        $.ajax({
-            method: "PUT",
-            url: "/articles/" + articleToSave._id,
-            data: articleToSave
-        }).then(function (data) {
-            if (data.saved) {
-                console.log(data);
-               homePage();
-            }
+        // var articleToSave =
+        //     $(this).parents(".card").data();
+        // $(this).parents(".card").remove();
+        var articleId;
+        $(document).on("click", ".saved", function(){
+            
+            articleId = $(this).data("id");
+            console.log(articleId);
+            console.log(this)
+            $.ajax({
+                    method: "PUT",
+                    url: "/articles/" + articleId,
+                    data: articleId
+                }).then(function (data) {
+                    if (data.saved) {
+                        console.log(data);
+                       homePage();
+                    }
+                }).catch(function(err){
+                    console.log(err)
+                })
         })
+        // console.log(articleToSave);
+
+        // articleToSave.saved = true;
+
+        // $.ajax({
+        //     method: "PUT",
+        //     url: "/articles/" + articleToSave._id,
+        //     data: articleToSave
+        // }).then(function (data) {
+        //     if (data.saved) {
+        //         console.log(data);
+        //        homePage();
+        //     }
+        // })
     };
 
 });
